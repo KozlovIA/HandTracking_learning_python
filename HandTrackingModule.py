@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 
-from mediapipe.python.solutions.hands import HandLandmark
+#from mediapipe.python.solutions.hands import HandLandmark
 
 #from mediapipe.python.solutions import hands
 
@@ -28,7 +28,7 @@ class handDetector():
                     self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
 
-    def findPosition(self, img, handNo = 0, draw = True):
+    def findPosition(self, img, handNo = 0, draw = True):       # handNo = 0 or -1
         lmList = []
         if self.results.multi_hand_landmarks:
             myHand = self.results.multi_hand_landmarks[handNo]
