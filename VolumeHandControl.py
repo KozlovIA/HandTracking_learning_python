@@ -7,6 +7,7 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
+
 ###############################
 wCam, hCam = 640, 480   #640, 480
 cTime = 0
@@ -45,15 +46,19 @@ while True:
         cv2.circle(img, (x1, y1), 15, (250, 100, 150), cv2.FILLED)
         cv2.circle(img, (x2, y2), 15, (250, 100, 150), cv2.FILLED)
         cv2.line(img, (x1, y1), (x2, y2), (250, 40, 250), 3)
-        cv2.circle(img, (cx, cy), 10, (200, 100, 250), cv2.FILLED)
         length = math.hypot(x2 - x1, y2 - y1)
         # Hand range 20 to 250, volume range -37 to 0
         vol = np.interp(length, [20, 250], [Vmin, Vmax])
         volume.SetMasterVolumeLevel(vol, None)
         volBar = np.interp(length, [20, 250], [400, 100])
         volPer = np.interp(vol, [-37, 0], [0, 100])
+        if(int(length) >= 250 or int(length) <= 20):
+            cv2.circle(img, (cx, cy), 10, (0, 250, 0), cv2.FILLED)
+        else:
+            cv2.circle(img, (cx, cy), 10, (200, 100, 250), cv2.FILLED)
     cv2.rectangle(img, (50, int(volBar)), (80, 400), (100, 250, 20), cv2.FILLED)
     cv2.putText(img, f'{int(volPer)}%', (33, 450), cv2.FONT_HERSHEY_COMPLEX_SMALL, 2, (150, 250, 20), 3)
+    
 
 
     cTime = time.time()
@@ -62,4 +67,3 @@ while True:
     cv2.putText(img, f'FPS: {int(fps)}', (10, 50), cv2.FONT_HERSHEY_COMPLEX_SMALL, 2, (50, 250, 0), 2)
     cv2.imshow("Img", img)
     cv2.waitKey(1)
-    
