@@ -1,4 +1,4 @@
-from HandControl import Ui_Dialog
+# from HandControl import Ui_Dialog
 from PySide2 import QtGui
 from PySide2.QtCore import Qt
 import cv2
@@ -13,8 +13,8 @@ import VolumeHandControlModule as vhc
 import sys
 import PySide2
 
-#vol = vhc.VolumeHandControl()
-#vol.VoulumeControl(True)
+# vol = vhc.VolumeHandControl()
+# vol.VoulumeControl(False)
 
 #if __name__ == "main":
 #    app = QtGui.QGuiApplication(sys.argv)
@@ -23,3 +23,25 @@ import PySide2
 #    ui.setupUi(Form)
 #    Form.show()
 #    sys.exit(app.exec_())
+
+
+# from PyQt5 import QtWidgets, uic
+from PyQt6 import QtWidgets, uic
+
+# app = QtWidgets.QApplication([])
+
+# form = uic.loadUi("C:\PyProject\Create_application\HCtest.ui")
+
+# form.show()
+
+# app.exec()
+
+from gui import HCapp_ui
+app = QtWidgets.QApplication(sys.argv)
+main_window = QtWidgets.QMainWindow()
+ui = HCapp_ui.Ui_MainWindow()
+# ui.setupUi(main_window)
+main_window.show()
+
+RetCode = app.exec()
+sys.exit(RetCode)
